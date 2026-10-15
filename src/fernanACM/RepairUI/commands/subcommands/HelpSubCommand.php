@@ -17,6 +17,7 @@ use pocketmine\player\Player;
 use pocketmine\command\CommandSender;
 # Lib - Commando
 use CortexPE\Commando\BaseSubCommand;
+use CortexPE\Commando\args\IntegerArgument;
 # My files
 use fernanACM\RepairUI\RP;
 use fernanACM\RepairUI\utils\PluginUtils;
@@ -34,6 +35,7 @@ class HelpSubCommand extends BaseSubCommand{
      * @return void
      */
 	protected function prepare(): void{
+        $this->registerArgument(0, new IntegerArgument("page", true));
     }
 
     /**

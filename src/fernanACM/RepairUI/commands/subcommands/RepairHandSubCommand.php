@@ -17,6 +17,7 @@ use pocketmine\player\Player;
 use pocketmine\command\CommandSender;
 # Lib - Commando
 use CortexPE\Commando\BaseSubCommand;
+use CortexPE\Commando\args\RawStringArgument;
 # My files
 use fernanACM\RepairUI\RP;
 use fernanACM\RepairUI\utils\PluginUtils;
@@ -28,7 +29,7 @@ use fernanACM\RepairUI\manager\RepairManager;
 class RepairHandSubCommand extends BaseSubCommand{
 
     public function __construct(){
-        parent::__construct("hand", "", []);
+        parent::__construct("hand", "Repair the item in hand", []);
         $this->setPermission(Perms::REPAIR_HAND);
     }
 
@@ -36,6 +37,7 @@ class RepairHandSubCommand extends BaseSubCommand{
      * @return void
      */
 	protected function prepare(): void{
+        $this->registerArgument(0, new RawStringArgument("extra", true));
     }
 
     /**
