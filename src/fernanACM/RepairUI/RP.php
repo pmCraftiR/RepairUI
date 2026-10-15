@@ -20,11 +20,6 @@ use pocketmine\utils\SingletonTrait;
 # Libs
 use Vecnavium\FormsUI\FormsUI;
 
-use muqsit\simplepackethandler\SimplePacketHandler;
-
-use CortexPE\Commando\PacketHooker;
-use CortexPE\Commando\BaseCommand;
-
 use DaPigGuy\libPiggyEconomy\libPiggyEconomy;
 use DaPigGuy\libPiggyEconomy\providers\EconomyProvider;
 use DaPigGuy\libPiggyUpdateChecker\libPiggyUpdateChecker;
@@ -116,8 +111,6 @@ class RP extends PluginBase{
         foreach([
             "libPiggyEconomy" => libPiggyEconomy::class,
             "FormsUI" => FormsUI::class,
-            "SimplePacketHandler" => SimplePacketHandler::class,
-            "Commando" => BaseCommand::class,
             "libPiggyUpdateChecker" => libPiggyUpdateChecker::class
             ] as $virion => $class
         ){
@@ -127,7 +120,6 @@ class RP extends PluginBase{
                 return;
             }
         }
-        if(!PacketHooker::isRegistered()) PacketHooker::register($this);
         # Update
         libPiggyUpdateChecker::init($this);
         # libPiggyEconomy
@@ -139,7 +131,7 @@ class RP extends PluginBase{
      * @return void
      */
     protected function loadCommands(): void{
-        $this->getServer()->getCommandMap()->register("repairui", new RepairCommand);
+        $this->getServer()->getCommandMap()->register("repairui", new RepairCommand($this));
     }
 
     /**
